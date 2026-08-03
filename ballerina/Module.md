@@ -1,9 +1,3 @@
-# Ballerina OpenAI Responses connector
-
-[![Build](https://github.com/ballerina-platform/module-ballerinax-openai.responses/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-openai.responses/actions/workflows/ci.yml)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-openai.responses.svg)](https://github.com/ballerina-platform/module-ballerinax-openai.responses/commits/main)
-[![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/openai.responses.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%2Fopenai.responses)
-
 ## Overview
 
 [OpenAI](https://openai.com/), an AI research organization focused on creating friendly AI for humanity, offers the [OpenAI API](https://platform.openai.com/docs/api-reference/introduction) to access its powerful AI models for tasks like natural language processing and image generation.
@@ -71,7 +65,8 @@ public function main() returns error? {
         input: "What is Ballerina programming language?"
     };
 
-    responses:Response response = check openAIResponses->/responses.post(request);
+    responses:Response response =
+        check openAIResponses->/responses.post(request);
 }
 ```
 
@@ -87,96 +82,3 @@ The `OpenAI Responses` connector provides practical examples illustrating usage 
 
 1. [CLI assistant](https://github.com/ballerina-platform/module-ballerinax-openai.responses/tree/main/examples/cli-assistant) - Execute the user's task description by generating and running the appropriate command in the command line interface of their selected operating system.
 2. [Image to markdown document converter](https://github.com/ballerina-platform/module-ballerinax-openai.responses/tree/main/examples/image-to-markdown-converter) - Generate detailed markdown documentation based on the image content.
-
-## Build from the source
-
-### Setting up the prerequisites
-
-1. Download and install Java SE Development Kit (JDK) version 17. You can download it from either of the following sources:
-
-    * [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
-    * [OpenJDK](https://adoptium.net/)
-
-   > **Note:** After installation, remember to set the `JAVA_HOME` environment variable to the directory where JDK was installed.
-
-2. Download and install [Ballerina Swan Lake](https://ballerina.io/).
-
-3. Download and install [Docker](https://www.docker.com/get-started).
-
-   > **Note**: Ensure that the Docker daemon is running before executing any tests.
-
-4. Export GitHub Personal access token with read package permissions as follows,
-
-    ```bash
-    export packageUser=<Username>
-    export packagePAT=<Personal access token>
-    ```
-
-### Build options
-
-Execute the commands below to build from the source.
-
-1. To build the package:
-
-   ```bash
-   ./gradlew clean build
-   ```
-
-2. To run the tests:
-
-   ```bash
-   ./gradlew clean test
-   ```
-
-3. To build without the tests:
-
-   ```bash
-   ./gradlew clean build -x test
-   ```
-
-4. To run tests against different environments:
-
-   ```bash
-   ./gradlew clean test -Pgroups=<Comma separated groups/test cases>
-   ```
-
-5. To debug the package with a remote debugger:
-
-   ```bash
-   ./gradlew clean build -Pdebug=<port>
-   ```
-
-6. To debug with the Ballerina language:
-
-   ```bash
-   ./gradlew clean build -PbalJavaDebug=<port>
-   ```
-
-7. Publish the generated artifacts to the local Ballerina Central repository:
-
-    ```bash
-    ./gradlew clean build -PpublishToLocalCentral=true
-    ```
-
-8. Publish the generated artifacts to the Ballerina Central repository:
-
-   ```bash
-   ./gradlew clean build -PpublishToCentral=true
-   ```
-
-## Contribute to Ballerina
-
-As an open-source project, Ballerina welcomes contributions from the community.
-
-For more information, go to the [contribution guidelines](https://github.com/ballerina-platform/ballerina-lang/blob/master/CONTRIBUTING.md).
-
-## Code of conduct
-
-All the contributors are encouraged to read the [Ballerina Code of Conduct](https://ballerina.io/code-of-conduct).
-
-## Useful links
-
-* For more information go to the [`openai.responses` package](https://central.ballerina.io/ballerinax/openai.responses/latest).
-* For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
-* Chat live with us via our [Discord server](https://discord.gg/ballerinalang).
-* Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.

@@ -1,0 +1,13 @@
+[package]
+distribution = "2201.12.0"
+org = "ballerinax"
+name = "openai.responses"
+version = "@toml.version@"
+license = ["Apache-2.0"]
+authors = ["Ballerina"]
+keywords = ["AI/Chat", "OpenAI", "Cost/Paid", "GPT-4", "ChatGPT", "Vendor/OpenAI"]
+icon = "icon.png"
+repository = "https://github.com/ballerina-platform/module-ballerinax-openai.responses"
+
+[build-options]
+observabilityIncluded = true
