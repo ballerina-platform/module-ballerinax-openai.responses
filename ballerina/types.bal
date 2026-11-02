@@ -1852,7 +1852,7 @@ public type ToolSearchCall record {
 
 # Constrains effort on reasoning for
 # [reasoning models](https://platform.openai.com/docs/guides/reasoning).
-# Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing
+# Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing
 # reasoning effort can result in faster responses and fewer tokens used
 # on reasoning in a response.
 # 
@@ -1860,7 +1860,7 @@ public type ToolSearchCall record {
 # - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
 # - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
 # - `xhigh` is supported for all models after `gpt-5.1-codex-max`.
-public type ReasoningEffort "none"|"minimal"|"low"|"medium"|"high"|"xhigh"?;
+public type ReasoningEffort "none"|"minimal"|"low"|"medium"|"high"|"xhigh"|"max"?;
 
 # A refusal from the model.
 public type RefusalContent record {
