@@ -117,6 +117,13 @@ These changes are done in order to improve the overall usability, and as workaro
     - **Note on the `Response` re-declaration**: dropping the `default` from a `required` field would have made it a required-without-default Ballerina field, and Ballerina data binding rejects an absent key for such a field even when the type is nilable (`missing required field 'temperature' of type 'decimal?'`). Keeping `default: 1` on `Response.temperature`/`Response.top_p` preserves the tolerant read-side binding while the request side becomes optional.
     - **Note on what was left in place**: `Response.parallel_tool_calls` (`default: true`, response-only), the `ImageGenTool` tool-configuration defaults (`quality`, `size`, `output_format`, `output_compression`, `moderation`, `background`, `partial_images`), `WebSearchTool.search_context_size`, and the `type` discriminator defaults across the item/tool schemas were deliberately kept — none of them is a top-level request parameter that a reasoning model rejects.
 
+16. **Made the `auth` field of `ConnectionConfig` optional (post-generation change to `types.bal` and `client.bal`)**:
+
+   - **Original**: `http:BearerTokenConfig auth;`, passed to the HTTP client as `auth: config.auth`
+   - **Updated**: `http:BearerTokenConfig auth?;`. `client.bal` sets `httpClientConfig.auth` only when `auth` is set
+   - **Reason**: With `auth` set, the HTTP client's bearer token handler overwrites the `Authorization` header on every request with the token given at initialization, so a caller cannot send a token that changes over time, such as a short-lived access token from OpenAI workload identity federation, through the `headers` parameter. When `auth` is not set, no handler is installed and the `Authorization` header passed in `headers` is sent as is. Existing callers that set `auth` are not affected.
+   - **Note**: This is not a change to the OpenAPI specification. The OpenAPI tool always generates `auth` as a required field when the specification declares an `http` or `oauth2` security scheme, so this change must be applied again after regenerating the client.
+
 ## OpenAPI cli command
 
 The following command was used to generate the Ballerina client from the OpenAPI specification. The command should be executed from the repository root directory.
