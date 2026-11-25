@@ -59,6 +59,16 @@ final responses:Client openAIResponses = check new ({
 });
 ```
 
+If the token changes between requests, for example a short-lived access token from OpenAI workload identity federation, leave out `auth` and pass the full `Authorization` header value in the `headers` of each request. When `auth` is set, the client replaces any `Authorization` header passed in `headers` with its own token. A client with neither sends requests without authentication, which OpenAI rejects with a `401` response.
+
+```ballerina
+final responses:Client openAIResponses = check new ({});
+
+// In the function that makes the request:
+responses:Response response = check openAIResponses->/responses.post(request,
+    headers = {"Authorization": "Bearer " + accessToken});
+```
+
 ### Step 3: Invoke the connector operation
 
 Now, you can utilize the available connector operation.

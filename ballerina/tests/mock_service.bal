@@ -233,6 +233,19 @@ http:Service mockService = service object {
     }
 };
 
+const NO_AUTHORIZATION_HEADER = "<no Authorization header>";
+
+// Returns the `Authorization` header of the request as the output text, so that the tests can check which header
+// the client sent.
+http:Service authorizationEchoService = service object {
+    resource function post responses(http:Request httpRequest, @http:Payload CreateResponse request)
+            returns Response {
+        string|http:HeaderNotFoundError authorization = httpRequest.getHeader("Authorization");
+        string text = authorization is string ? authorization : NO_AUTHORIZATION_HEADER;
+        return buildMockResponse(request, [assistantMessage([outputText(text, false)])]);
+    }
+};
+
 function init() returns error? {
     if isLiveServer {
         log:printInfo("Skipping mock server initialization as the tests are running on live server");
@@ -241,5 +254,6 @@ function init() returns error? {
 
     log:printInfo("Initiating mock server...");
     check httpListener.attach(mockService, "/");
+    check httpListener.attach(authorizationEchoService, "/auth");
     check httpListener.'start();
 }
